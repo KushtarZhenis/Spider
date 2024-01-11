@@ -7,9 +7,9 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.57"/>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+    <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.16"/>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="../MODEL/MODEL.csproj" />
+    <ProjectReference Include="../MODEL/MODEL.csproj"/>
   </ItemGroup>
 </Project>
