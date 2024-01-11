@@ -1,0 +1,194 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/kushtar/Desktop/Github/CSharp/Spider/Bilimdiler/Bilimdiler.csproj": {}
+  },
+  "projects": {
+    "/Users/kushtar/Desktop/Github/CSharp/Spider/Bilimdiler/Bilimdiler.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kushtar/Desktop/Github/CSharp/Spider/Bilimdiler/Bilimdiler.csproj",
+        "projectName": "Bilimdiler",
+        "projectPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/Bilimdiler/Bilimdiler.csproj",
+        "packagesPath": "/Users/kushtar/.nuget/packages/",
+        "outputPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/Bilimdiler/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kushtar/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/kushtar/Desktop/Github/CSharp/Spider/COMMON/COMMON.csproj": {
+                "projectPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/COMMON/COMMON.csproj"
+              },
+              "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/MODEL.csproj": {
+                "projectPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/MODEL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.57, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kushtar/Desktop/Github/CSharp/Spider/COMMON/COMMON.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kushtar/Desktop/Github/CSharp/Spider/COMMON/COMMON.csproj",
+        "projectName": "COMMON",
+        "projectPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/COMMON/COMMON.csproj",
+        "packagesPath": "/Users/kushtar/.nuget/packages/",
+        "outputPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/COMMON/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kushtar/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/MODEL.csproj": {
+                "projectPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/MODEL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.57, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/MODEL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/MODEL.csproj",
+        "projectName": "MODEL",
+        "projectPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/MODEL.csproj",
+        "packagesPath": "/Users/kushtar/.nuget/packages/",
+        "outputPath": "/Users/kushtar/Desktop/Github/CSharp/Spider/MODEL/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kushtar/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
