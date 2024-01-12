@@ -35,9 +35,19 @@ public class DateTimeHelper
         TimeSpan timeLeft = new TimeSpan(TimeSpan.TicksPerSecond * leftTotalSeconds);
 
         double percent = Math.Round(100.00 * Count / TotalNum, 2);
-        Console.WriteLine($"{Count} / {TotalNum} => {percent}");
+        Console.WriteLine($"{Count} / {TotalNum} => {percent}%");
         Console.WriteLine($"Total Time Passed => " + FormatHMS(timePassed));
         Console.WriteLine($"Total Time Left   => " + FormatHMS(timeLeft) + Environment.NewLine);
+    }
+    #endregion
+
+    #region Reset All Counters +ResetPoint()
+    public static void ResetPoint()
+    {
+        BeginTime = DateTime.Now;
+        CurrentTime = DateTime.Now;
+        TotalNum = TotalNum - Count;
+        Count = 0;
     }
     #endregion
 

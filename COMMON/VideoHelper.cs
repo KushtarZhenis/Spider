@@ -19,7 +19,11 @@ public class VideoHelper
         if (!Directory.Exists(saveDirectory)) Directory.CreateDirectory(saveDirectory);
 
         string savePath = $"{saveDirectory}/{video.Title}.{selectedStream.Container}";
-        if (File.Exists(savePath)) return;
+        if (File.Exists(savePath))
+        {
+            DateTimeHelper.ResetPoint();
+            return;
+        }
         Console.WriteLine($"Dowloading: {video.Title}");
         await youtube.Videos.DownloadAsync(videoUrl, savePath);
     }
@@ -58,6 +62,7 @@ public class VideoHelper
 
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Enter a Valid Video Or Playlist Url: " + Environment.NewLine);
             string url = Console.ReadLine();
             byte urlType = 0;
