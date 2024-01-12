@@ -28,6 +28,8 @@ public class DateTimeHelper
         long leftTotalSeconds = (int)Math.Round(timePassed.TotalSeconds / Count * (TotalNum - Count));
         TimeSpan timeLeft = new TimeSpan(TimeSpan.TicksPerSecond * leftTotalSeconds);
 
+        double percent = Math.Round(100.00 * Count / TotalNum, 2);
+        Console.WriteLine($"{Count} / {TotalNum} => {percent}");
         Console.WriteLine($"Total Time Passed => " + FormatHMS(timePassed));
         Console.WriteLine($"Total Time Left   => " + FormatHMS(timeLeft) + Environment.NewLine);
     }

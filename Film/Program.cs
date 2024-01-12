@@ -1,6 +1,6 @@
 ﻿using COMMON;
 using MODEL;
-using FilmManager;
+using Film;
 using HtmlAgilityPack;
 using System.Net.Mime;
 
@@ -15,7 +15,7 @@ int totalPages = 3848;
 
 Console.ForegroundColor = ConsoleColor.Green;
 string jsonContent = File.ReadAllText(filmUrlsFilePath);
-List<Film> jsonList = JsonHelper.DeSerializeObject<List<Film>>(jsonContent);
+List<MODEL.Film> jsonList = JsonHelper.DeSerializeObject<List<MODEL.Film>>(jsonContent);
 List<string> filmList = jsonList.Select(x => x.PageUrl).ToList();
 jsonList.Clear();
 
