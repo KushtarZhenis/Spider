@@ -1,6 +1,5 @@
 using COMMON;
 using System.Net;
-using NAudio.Wave;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -22,101 +21,101 @@ public class SongHelper
     private static readonly int totalPage = 383;
     private static int errorCount = 0;
 
-    public static async Task StartDownloading()
-    {
-        int count = 1;
-        Console.ForegroundColor = ConsoleColor.Green;
-        string jsonContent = File.ReadAllText(songUrlsFilePath);
-        JArray jsonArray = DecodeHtmlEntitiesInArray(jsonContent);
-        int totalNum = jsonArray.Count;
-        foreach (JToken item in jsonArray)
-        {
-            string songUrl = item["data"]["url"].Value<string>().Replace("https://www.ankui.kz/", "https://www.ankui.kz");
-            string name = Path.GetFileName(songUrl);
-            string extension = Path.GetExtension(songUrl);
-            string mp3SavePath = Path.Combine(mp3DirectoryPath, name);
+    // public static async Task StartDownloading()
+    // {
+    //     int count = 1;
+    //     Console.ForegroundColor = ConsoleColor.Green;
+    //     string jsonContent = File.ReadAllText(songUrlsFilePath);
+    //     JArray jsonArray = DecodeHtmlEntitiesInArray(jsonContent);
+    //     int totalNum = jsonArray.Count;
+    //     foreach (JToken item in jsonArray)
+    //     {
+    //         string songUrl = item["data"]["url"].Value<string>().Replace("https://www.ankui.kz/", "https://www.ankui.kz");
+    //         string name = Path.GetFileName(songUrl);
+    //         string extension = Path.GetExtension(songUrl);
+    //         string mp3SavePath = Path.Combine(mp3DirectoryPath, name);
 
-            try
-            {
-                if (new FileInfo(mp3SavePath).Exists == false)
-                {
-                    File.Create(mp3SavePath);
-                    await DownloadMp3Async(mp3SavePath, songUrl);
-                }
-            }
-            catch (Exception ex)
-            {
-                File.AppendAllText(errorsFilePath, $"{Environment.NewLine}Error {++errorCount} : At Url = {songUrl}{Environment.NewLine}{ex.Message}");
-            }
-            finally
-            {
-                Console.Clear();
-                double percentage = Math.Round(100.00 * count / totalNum, 2);
-                Console.WriteLine($"{Environment.NewLine + Environment.NewLine}  Finished : {count} / {totalNum} => {percentage}%{Environment.NewLine + Environment.NewLine}");
-                count++;
-            }
-            Console.WriteLine("---------------Over---------------");
-            Console.ResetColor();
-        }
-    }
+    //         try
+    //         {
+    //             if (new FileInfo(mp3SavePath).Exists == false)
+    //             {
+    //                 File.Create(mp3SavePath);
+    //                 await DownloadMp3Async(mp3SavePath, songUrl);
+    //             }
+    //         }
+    //         catch (Exception ex)
+    //         {
+    //             File.AppendAllText(errorsFilePath, $"{Environment.NewLine}Error {++errorCount} : At Url = {songUrl}{Environment.NewLine}{ex.Message}");
+    //         }
+    //         finally
+    //         {
+    //             Console.Clear();
+    //             double percentage = Math.Round(100.00 * count / totalNum, 2);
+    //             Console.WriteLine($"{Environment.NewLine + Environment.NewLine}  Finished : {count} / {totalNum} => {percentage}%{Environment.NewLine + Environment.NewLine}");
+    //             count++;
+    //         }
+    //         Console.WriteLine("---------------Over---------------");
+    //         Console.ResetColor();
+    //     }
+    // }
 
-    public static async Task StartAddingUrls()
-    {
-        Console.ForegroundColor = ConsoleColor.Green;
+    // public static async Task StartAddingUrls()
+    // {
+    //     Console.ForegroundColor = ConsoleColor.Green;
 
-        await Task.Run(async () =>
-          {
-              File.WriteAllText(songUrlsFilePath, "[" + Environment.NewLine);
-              int pageNumber = Convert.ToInt32(File.ReadAllText(indexFilePath));
+    //     await Task.Run(async () =>
+    //       {
+    //           File.WriteAllText(songUrlsFilePath, "[" + Environment.NewLine);
+    //           int pageNumber = Convert.ToInt32(File.ReadAllText(indexFilePath));
 
-              for (; pageNumber <= totalPage; pageNumber++)
-              {
-                  try
-                  {
-                      string pageUrl = songsUrl + pageNumber + partialUrl;
-                      List<string> songPageUrls = GetPageUrlList(pageUrl);
-                      string appendingContent = string.Empty;
-                      foreach (string songPageUrl in songPageUrls)
-                      {
-                          string songId = songPageUrl[7..].Replace(".html", "");
-                          var formData = new Dictionary<string, string> 
-                          { 
-                            { "musicid", $"{songId}" }, 
-                            { "language", "kz" }, 
-                            };
-                          string jsonResponse = await SendPostRequest(apiUrl, formData);
-                          PostResponse json = JsonConvert.DeserializeObject<PostResponse>(jsonResponse);
-                          string mp3Url = homeUrl + json.Data.Url;
+    //           for (; pageNumber <= totalPage; pageNumber++)
+    //           {
+    //               try
+    //               {
+    //                   string pageUrl = songsUrl + pageNumber + partialUrl;
+    //                   List<string> songPageUrls = GetPageUrlList(pageUrl);
+    //                   string appendingContent = string.Empty;
+    //                   foreach (string songPageUrl in songPageUrls)
+    //                   {
+    //                       string songId = songPageUrl[7..].Replace(".html", "");
+    //                       var formData = new Dictionary<string, string> 
+    //                       { 
+    //                         { "musicid", $"{songId}" }, 
+    //                         { "language", "kz" }, 
+    //                         };
+    //                       string jsonResponse = await SendPostRequest(apiUrl, formData);
+    //                       PostResponse json = JsonConvert.DeserializeObject<PostResponse>(jsonResponse);
+    //                       string mp3Url = homeUrl + json.Data.Url;
 
-                          appendingContent += @$"
-    {{
-        ""message"": ""{json.Message}"",
-        ""status"": ""{json.Status}"",
-        ""backUrl"": ""{json.BackUrl}"",
-        ""data"": 
-        {{
-            ""url"": ""{mp3Url}"",
-            ""lyric"": ""{json.Data.Lyric}""
-        }}
-    }},{Environment.NewLine}";
-                          string destinationFilePath = Path.Combine(mp3DirectoryPath, songId, ".mp3");
-                      }
-                      File.AppendAllText(songUrlsFilePath, appendingContent);
-                  }
-                  catch (Exception ex)
-                  {
-                      File.AppendAllText(errorsFilePath, ex.Message);
-                  }
-                  finally
-                  {
-                      double percentage = Math.Round(100.00 * pageNumber / totalPage, 2);
-                      Console.Clear();
-                      Console.WriteLine($"{Environment.NewLine + Environment.NewLine}  Finished : {pageNumber} / {totalPage} => {percentage}%{Environment.NewLine + Environment.NewLine}");
-                      File.WriteAllText(indexFilePath, pageNumber.ToString());
-                  }
-              }
-          });
-    }
+    //                       appendingContent += @$"
+    // {{
+    //     ""message"": ""{json.Message}"",
+    //     ""status"": ""{json.Status}"",
+    //     ""backUrl"": ""{json.BackUrl}"",
+    //     ""data"": 
+    //     {{
+    //         ""url"": ""{mp3Url}"",
+    //         ""lyric"": ""{json.Data.Lyric}""
+    //     }}
+    // }},{Environment.NewLine}";
+    //                       string destinationFilePath = Path.Combine(mp3DirectoryPath, songId, ".mp3");
+    //                   }
+    //                   File.AppendAllText(songUrlsFilePath, appendingContent);
+    //               }
+    //               catch (Exception ex)
+    //               {
+    //                   File.AppendAllText(errorsFilePath, ex.Message);
+    //               }
+    //               finally
+    //               {
+    //                   double percentage = Math.Round(100.00 * pageNumber / totalPage, 2);
+    //                   Console.Clear();
+    //                   Console.WriteLine($"{Environment.NewLine + Environment.NewLine}  Finished : {pageNumber} / {totalPage} => {percentage}%{Environment.NewLine + Environment.NewLine}");
+    //                   File.WriteAllText(indexFilePath, pageNumber.ToString());
+    //               }
+    //           }
+    //       });
+    // }
 
     // private static List<string> GetPageUrlList(string PageUrl)
     // {

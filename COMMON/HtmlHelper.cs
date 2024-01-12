@@ -3,15 +3,16 @@ using HtmlAgilityPack;
 namespace COMMON;
 public class HtmlHelper
 {
+    #region Get Html Document From Url +GetHtmlDom(string url)
     public static HtmlDocument GetHtmlDom(string url)
     {
-
         HtmlWeb web = new HtmlWeb();
         HtmlDocument document = web.Load(url);
-
         return document;
     }
+    #endregion
 
+    #region Get Html Document As String From Url +GetHtmlDomAsString(string url)
     public static string GetHtmlDomAsString(string url)
     {
 
@@ -20,12 +21,14 @@ public class HtmlHelper
 
         return document;
     }
+    #endregion
 
-    public static async Task DownloadFile(string savePath, string imageUrl)
+    #region Download File From Url +DownloadFile(string savePath, string fileUrl)
+    public static async Task DownloadFile(string savePath, string fileUrl)
     {
         using (HttpClient httpClient = new HttpClient())
         {
-            HttpResponseMessage response = await httpClient.GetAsync(imageUrl);
+            HttpResponseMessage response = await httpClient.GetAsync(fileUrl);
             response.EnsureSuccessStatusCode();
 
             byte[] Bytes = await response.Content.ReadAsByteArrayAsync();
@@ -33,7 +36,9 @@ public class HtmlHelper
             File.WriteAllBytes(savePath, Bytes);
         }
     }
+    #endregion
 
+    #region Edit All Media In A File +EditAllMedia(string filePath, string siteUrl)
     public static async Task EditAllMedia(string filePath, string siteUrl)
     {
         string html = File.ReadAllText(filePath);
@@ -53,7 +58,10 @@ public class HtmlHelper
             string fullPath = Path.Combine(directoryPath, partialPath);
             await DownloadFile(fullPath, imgUrl);
             img.SetAttributeValue("src", "../" + partialPath);
-            await File.WriteAllTextAsync(filePath, dom.DocumentNode.OuterHtml);
+
+            string newFilePath = filePath.Replace("_wait", "");
+            await File.WriteAllTextAsync(newFilePath, dom.DocumentNode.OuterHtml);
+            if (File.Exists(filePath)) File.Delete(filePath);
         }
         foreach (HtmlNode audio in audios)
         {
@@ -68,7 +76,10 @@ public class HtmlHelper
             string fullPath = Path.Combine(directoryPath, partialPath);
             await DownloadFile(fullPath, imgUrl);
             audio.SetAttributeValue("src", "../" + partialPath);
-            await File.WriteAllTextAsync(filePath, dom.DocumentNode.OuterHtml);
+
+            string newFilePath = filePath.Replace("_wait", "");
+            await File.WriteAllTextAsync(newFilePath, dom.DocumentNode.OuterHtml);
+            if (File.Exists(filePath)) File.Delete(filePath);
         }
         foreach (HtmlNode video in videos)
         {
@@ -83,8 +94,12 @@ public class HtmlHelper
             string fullPath = Path.Combine(directoryPath, partialPath);
             await DownloadFile(fullPath, imgUrl);
             video.SetAttributeValue("src", "../" + partialPath);
-            await File.WriteAllTextAsync(filePath, dom.DocumentNode.OuterHtml);
+
+            string newFilePath = filePath.Replace("_wait", "");
+            await File.WriteAllTextAsync(newFilePath, dom.DocumentNode.OuterHtml);
+            if (File.Exists(filePath)) File.Delete(filePath);
         }
     }
+    #endregion
 
 }

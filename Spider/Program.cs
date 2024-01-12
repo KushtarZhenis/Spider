@@ -1,4 +1,4 @@
-﻿using Spider;
+﻿using COMMON;
 
-string saveDirectory = "/Users/kushtar/Desktop/YoutubeVideos";
-await VideoHelper.StartDownloading(saveDirectory);
+string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "SpiderSources/Videos");
+await VideoHelper.StartDownloading(directoryPath);

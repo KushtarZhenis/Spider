@@ -5,11 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider", "Spider\Spider.csproj", "{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bilimdiler", "Bilimdiler\Bilimdiler.csproj", "{8C463FA3-DC5B-469E-A57C-3100D7700410}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Song", "Song\Song.csproj", "{8B56E28E-9F7D-4DFF-B010-B78FEDCE82B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Film", "Film\Film.csproj", "{A3552F52-F36B-4E63-833E-AE5B47CE2E2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Film", "Film\Film.csproj", "{212B1B91-E356-44BB-AF84-7E3D1A9C59B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,17 +22,13 @@ Global
 		{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C463FA3-DC5B-469E-A57C-3100D7700410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C463FA3-DC5B-469E-A57C-3100D7700410}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C463FA3-DC5B-469E-A57C-3100D7700410}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C463FA3-DC5B-469E-A57C-3100D7700410}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B56E28E-9F7D-4DFF-B010-B78FEDCE82B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B56E28E-9F7D-4DFF-B010-B78FEDCE82B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B56E28E-9F7D-4DFF-B010-B78FEDCE82B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B56E28E-9F7D-4DFF-B010-B78FEDCE82B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3552F52-F36B-4E63-833E-AE5B47CE2E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3552F52-F36B-4E63-833E-AE5B47CE2E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3552F52-F36B-4E63-833E-AE5B47CE2E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3552F52-F36B-4E63-833E-AE5B47CE2E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212B1B91-E356-44BB-AF84-7E3D1A9C59B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212B1B91-E356-44BB-AF84-7E3D1A9C59B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212B1B91-E356-44BB-AF84-7E3D1A9C59B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212B1B91-E356-44BB-AF84-7E3D1A9C59B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

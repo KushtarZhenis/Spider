@@ -2,11 +2,14 @@ namespace COMMON;
 
 public class FileHelper
 {
+    #region Append A Line To File +AppendLine(string filePath, string content)
     public static async Task AppendLine(string filePath, string content)
     {
         await File.AppendAllTextAsync(filePath, content + Environment.NewLine);
     }
+    #endregion
 
+    #region Get All File Path In A Directory +GetAllFilePath(string pDirectoryPath)
     public static List<string> GetAllFilePath(string pDirectoryPath)
     {
         List<string> res = [];
@@ -22,4 +25,6 @@ public class FileHelper
 
         return res;
     }
+    #endregion
+
 }

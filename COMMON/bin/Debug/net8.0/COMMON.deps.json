@@ -11,10 +11,31 @@
           "HtmlAgilityPack": "1.11.57",
           "MODEL": "1.0.0",
           "Newtonsoft.Json": "13.0.3",
-          "RestSharp": "110.2.1-alpha.0.16"
+          "RestSharp": "110.2.1-alpha.0.16",
+          "YoutubeExplode": "6.3.11",
+          "YoutubeExplode.Converter": "6.3.11"
         },
         "runtime": {
           "COMMON.dll": {}
+        }
+      },
+      "AngleSharp/1.0.7": {
+        "dependencies": {
+          "System.Text.Encoding.CodePages": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/AngleSharp.dll": {
+            "assemblyVersion": "1.0.7.0",
+            "fileVersion": "1.0.7.0"
+          }
+        }
+      },
+      "CliWrap/3.6.4": {
+        "runtime": {
+          "lib/netcoreapp3.0/CliWrap.dll": {
+            "assemblyVersion": "3.6.4.0",
+            "fileVersion": "3.6.4.0"
+          }
         }
       },
       "HtmlAgilityPack/1.11.57": {
@@ -44,10 +65,34 @@
           }
         }
       },
+      "System.Text.Encoding.CodePages/8.0.0": {},
       "System.Text.Encodings.Web/7.0.0": {},
       "System.Text.Json/7.0.3": {
         "dependencies": {
           "System.Text.Encodings.Web": "7.0.0"
+        }
+      },
+      "YoutubeExplode/6.3.11": {
+        "dependencies": {
+          "AngleSharp": "1.0.7"
+        },
+        "runtime": {
+          "lib/net5.0/YoutubeExplode.dll": {
+            "assemblyVersion": "6.3.11.0",
+            "fileVersion": "6.3.11.0"
+          }
+        }
+      },
+      "YoutubeExplode.Converter/6.3.11": {
+        "dependencies": {
+          "CliWrap": "3.6.4",
+          "YoutubeExplode": "6.3.11"
+        },
+        "runtime": {
+          "lib/net5.0/YoutubeExplode.Converter.dll": {
+            "assemblyVersion": "6.3.11.0",
+            "fileVersion": "6.3.11.0"
+          }
         }
       },
       "MODEL/1.0.0": {
@@ -62,6 +107,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AngleSharp/1.0.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jZg7lDcrXRiIC8VBluuGKOCMR9mc4CIRX5vpQJ8fcgafs6T6plOzKHhAn3lJEwXorrltd9p1WtRxxhFpRBACbg==",
+      "path": "anglesharp/1.0.7",
+      "hashPath": "anglesharp.1.0.7.nupkg.sha512"
+    },
+    "CliWrap/3.6.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KVGVZlR0GWgN3Xr88oZMSzYu38TXIogwLz588e6wku3mIfg6lPchxpYWtZSZfurpTY63ANF61xWp8EZF3jkN4g==",
+      "path": "cliwrap/3.6.4",
+      "hashPath": "cliwrap.3.6.4.nupkg.sha512"
     },
     "HtmlAgilityPack/1.11.57": {
       "type": "package",
@@ -84,6 +143,13 @@
       "path": "restsharp/110.2.1-alpha.0.16",
       "hashPath": "restsharp.110.2.1-alpha.0.16.nupkg.sha512"
     },
+    "System.Text.Encoding.CodePages/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OZIsVplFGaVY90G2SbpgU7EnCoOO5pw1t4ic21dBF3/1omrJFpAGoNAVpPyMVOC90/hvgkGG3VFqR13YgZMQfg==",
+      "path": "system.text.encoding.codepages/8.0.0",
+      "hashPath": "system.text.encoding.codepages.8.0.0.nupkg.sha512"
+    },
     "System.Text.Encodings.Web/7.0.0": {
       "type": "package",
       "serviceable": true,
@@ -97,6 +163,20 @@
       "sha512": "sha512-AyjhwXN1zTFeIibHimfJn6eAsZ7rTBib79JQpzg8WAuR/HKDu9JGNHTuu3nbbXQ/bgI+U4z6HtZmCHNXB1QXrQ==",
       "path": "system.text.json/7.0.3",
       "hashPath": "system.text.json.7.0.3.nupkg.sha512"
+    },
+    "YoutubeExplode/6.3.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EL8NierKI3vi/pmTiAwhwxyFZeLqrn2fatCfYBA00uOdMsjqm4im9zRbxCfIsvJTrZoUkLAZbJUUJtWIjNPwdQ==",
+      "path": "youtubeexplode/6.3.11",
+      "hashPath": "youtubeexplode.6.3.11.nupkg.sha512"
+    },
+    "YoutubeExplode.Converter/6.3.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PoeKtZcqW/7c6Lfb/+nzhk0bISzvVcJBMh+bWagHsjJaMaMK1iwzJxPytVZT1N0W78lf12xtzwx+nJ1gfPiGGw==",
+      "path": "youtubeexplode.converter/6.3.11",
+      "hashPath": "youtubeexplode.converter.6.3.11.nupkg.sha512"
     },
     "MODEL/1.0.0": {
       "type": "project",
