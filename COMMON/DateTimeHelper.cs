@@ -24,7 +24,7 @@ public class DateTimeHelper
 
     #endregion
 
-    #region Calculate Point For Lopp +CalculatePointInLoop()
+    #region Calculate Point For Loop +CalculatePointInLoop()
     public static void CalculatePointInLoop()
     {
         CurrentTime = DateTime.Now;
@@ -44,10 +44,7 @@ public class DateTimeHelper
     #region Reset All Counters +ResetPoint()
     public static void ResetPoint()
     {
-        BeginTime = DateTime.Now;
-        CurrentTime = DateTime.Now;
-        TotalNum = TotalNum - Count;
-        Count = 0;
+        BeginTime = CurrentTime;
     }
     #endregion
 

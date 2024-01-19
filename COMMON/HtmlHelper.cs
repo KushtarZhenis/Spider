@@ -23,21 +23,6 @@ public class HtmlHelper
     }
     #endregion
 
-    #region Download File From Url +DownloadFile(string savePath, string fileUrl)
-    public static async Task DownloadFile(string savePath, string fileUrl)
-    {
-        using (HttpClient httpClient = new HttpClient())
-        {
-            HttpResponseMessage response = await httpClient.GetAsync(fileUrl);
-            response.EnsureSuccessStatusCode();
-
-            byte[] Bytes = await response.Content.ReadAsByteArrayAsync();
-
-            File.WriteAllBytes(savePath, Bytes);
-        }
-    }
-    #endregion
-
     #region Edit All Media In A File +EditAllMedia(string filePath, string siteUrl)
     public static async Task EditAllMedia(string filePath, string siteUrl)
     {
@@ -56,7 +41,7 @@ public class HtmlHelper
             directoryPath = Path.GetDirectoryName(directoryPath);
             string partialPath = Path.Combine("images", DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension);
             string fullPath = Path.Combine(directoryPath, partialPath);
-            await DownloadFile(fullPath, imgUrl);
+            await FileHelper.DownloadFile(fullPath, imgUrl);
             img.SetAttributeValue("src", "../" + partialPath);
 
             string newFilePath = filePath.Replace("_wait", "");
@@ -74,7 +59,7 @@ public class HtmlHelper
             string directoryPath = Path.GetDirectoryName(filePath);
             string partialPath = Path.Combine("audios", DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension);
             string fullPath = Path.Combine(directoryPath, partialPath);
-            await DownloadFile(fullPath, imgUrl);
+            await FileHelper.DownloadFile(fullPath, imgUrl);
             audio.SetAttributeValue("src", "../" + partialPath);
 
             string newFilePath = filePath.Replace("_wait", "");
@@ -92,7 +77,7 @@ public class HtmlHelper
             string directoryPath = Path.GetDirectoryName(filePath);
             string partialPath = Path.Combine("videos", DateTime.Now.ToString("yyyyMMddHHmmssfff") + extension);
             string fullPath = Path.Combine(directoryPath, partialPath);
-            await DownloadFile(fullPath, imgUrl);
+            await FileHelper.DownloadFile(fullPath, imgUrl);
             video.SetAttributeValue("src", "../" + partialPath);
 
             string newFilePath = filePath.Replace("_wait", "");
