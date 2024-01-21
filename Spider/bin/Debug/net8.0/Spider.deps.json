@@ -10,9 +10,7 @@
         "dependencies": {
           "COMMON": "1.0.0",
           "MODEL": "1.0.0",
-          "System.Linq.Async": "6.0.1",
-          "YoutubeExplode": "6.3.11",
-          "YoutubeExplode.Converter": "6.3.11"
+          "System.Linq.Async": "6.0.1"
         },
         "runtime": {
           "Spider.dll": {}

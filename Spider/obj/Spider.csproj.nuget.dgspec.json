@@ -180,14 +180,6 @@
             "System.Linq.Async": {
               "target": "Package",
               "version": "[6.0.1, )"
-            },
-            "YoutubeExplode": {
-              "target": "Package",
-              "version": "[6.3.11, )"
-            },
-            "YoutubeExplode.Converter": {
-              "target": "Package",
-              "version": "[6.3.11, )"
             }
           },
           "imports": [

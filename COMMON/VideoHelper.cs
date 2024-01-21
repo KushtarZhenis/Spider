@@ -58,40 +58,33 @@ public class VideoHelper
     #region Download Main Task +StartDownloading(string saveDirectory) 
     public static async Task StartDownloading(string saveDirectory)
     {
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-
         while (true)
         {
             Console.Clear();
             Console.WriteLine("Enter a Valid Video Or Playlist Url: " + Environment.NewLine);
             string url = Console.ReadLine();
             byte urlType = 0;
-            bool isValidUrl = false;
 
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage response = await client.GetAsync(url);
-                    isValidUrl = response.IsSuccessStatusCode;
+                    bool isValidUrl = response.IsSuccessStatusCode;
+                    if (isValidUrl) urlType = 1;
                 }
             }
-            catch (HttpRequestException)
-            {
-                isValidUrl = false;
-            }
+            catch (HttpRequestException) { urlType = 0; }
 
-            if (isValidUrl && url.Contains("https://www.youtube.com/watch?v="))
-            {
-
-                urlType = 1;
-                Console.WriteLine("This Url Is Video Url!");
-                Console.WriteLine("Start, Another Url Or Exit (Start/AnotherUrl/AnyKey): ");
-            }
-            else if (isValidUrl && url.Contains("https://www.youtube.com/playlist?list="))
+            if (urlType != 0 && url.Contains("playlist?list="))
             {
                 urlType = 2;
-                Console.WriteLine("This Url Is Playlist Url!");
+                Console.WriteLine("This Url Is a Playlist Url!");
+                Console.WriteLine("Start, Another Url Or Exit (Start/AnotherUrl/AnyKey): ");
+            }
+            else if (urlType != 0)
+            {
+                Console.WriteLine("This Url Is a Video Url!");
                 Console.WriteLine("Start, Another Url Or Exit (Start/AnotherUrl/AnyKey): ");
             }
             else
@@ -99,6 +92,7 @@ public class VideoHelper
                 Console.WriteLine("This Url Is Invalid!");
                 Console.WriteLine("Another Url Or Exit (AnotherUrl/AnyKey): ");
             }
+
 
             Console.WriteLine();
             string key = Console.ReadLine();
