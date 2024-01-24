@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongSpider", "SongSpider\So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sozdikqor", "Sozdikqor\Sozdikqor.csproj", "{36A72275-3B92-4C36-8949-37D6C0C850B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoSpider", "VideoSpider\VideoSpider.csproj", "{A2F9466C-3C3E-4E42-A256-0B5F8D045957}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{36A72275-3B92-4C36-8949-37D6C0C850B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36A72275-3B92-4C36-8949-37D6C0C850B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36A72275-3B92-4C36-8949-37D6C0C850B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F9466C-3C3E-4E42-A256-0B5F8D045957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F9466C-3C3E-4E42-A256-0B5F8D045957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F9466C-3C3E-4E42-A256-0B5F8D045957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F9466C-3C3E-4E42-A256-0B5F8D045957}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
