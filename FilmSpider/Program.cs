@@ -1,23 +1,48 @@
 ﻿using COMMON;
-using MODEL;
-using MODEL.Film;
-using MODEL.FilmInfo;
+using DBHelper;
+using Dapper;
 using FilmSpider;
-using HtmlAgilityPack;
+using MODEL.Film;
+using MODEL.JsonFilm;
+
+
+SpiderSingleton.GetInstance.SetConnectionString("server=localhost;database=film_db;user=film_dba;password=12345678;charset=utf8mb4");
+SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
+SimpleCRUD.SetTableNameResolver(new SpiderResolver());
+
 
 string filmInfoDirectory = "/Users/kushtar/Desktop/Sources/Film/filmsInfo";
+int maxId = FileHelper.GetAllFilePath(filmInfoDirectory).Count;
 
-List<string> filePathList = FileHelper.GetAllFilePath(filmInfoDirectory);
-int id = 1;
+using var _connection = Utilities.GetOpenConnection();
+using (var tran = _connection.BeginTransaction())
+{
+    DateTimeHelper.StartPoint(maxId);
 
-// foreach (string filePath in filePathList)
-// {
-string filePath = filePathList[id - 1];
-string content = File.ReadAllText(filePath);
-PartialFilm pFilm = JsonHelper.DeSerializeObject<PartialFilm>(content);
+    for (int id = 1; id <= maxId; id++)
+    {
+        string filePath = Path.Combine(filmInfoDirectory, $"film{id}.json");
+        string content = File.ReadAllText(filePath);
+        PartialFilm pFilm = JsonHelper.DeSerializeObject<PartialFilm>(content);
+        int count = 0;
+        count = _connection.Query<int>("select count(1) from film where title = @Title and description = @Description", new { Title = pFilm.Title, Description = pFilm.Description }).FirstOrDefault();
+        DateTimeHelper.CalculatePointInLoop();
 
+        if (count == 0)
+        {
+            try
+            {
+                FilmHelper.InsertFilm(pFilm, id, _connection);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                tran.Rollback();
+            }
+        }
+    }
+    tran.Commit();
+}
 
-
-
-// }
+_connection.Close();
 

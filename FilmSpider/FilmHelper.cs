@@ -1,11 +1,14 @@
 using System.Net;
 using COMMON;
+using Dapper;
+using DBHelper;
 using HtmlAgilityPack;
 using MODEL;
 using MODEL.Film;
-using MODEL.FilmInfo;
+using MODEL.JsonFilm;
 
 namespace FilmSpider;
+
 public class FilmHelper
 {
     public static void WriteErrorMsg(string msg)
@@ -46,89 +49,110 @@ public class FilmHelper
         }
     }
 
-    public static Film InsertFilm(PartialFilm pFilm, int id)
+    public static void InsertFilm(PartialFilm pFilm, int id, MySql.Data.MySqlClient.MySqlConnection _connection)
     {
-        var rate = new Rate()
-        {
-            Id = id,
-            Douban = pFilm.Rate.Douban,
-            Imdb = pFilm.Rate.IMDB
-        };
-        var film = new Film()
-        {
-            Id = id,
-            Title = pFilm.Title,
-            ReleaseYear = pFilm.ReleaseYear,
-            RateId = rate.Id,
-            Duration = pFilm.Duration,
-            ThumbnailUrl = pFilm.Duration,
-            Description = pFilm.Description
-        };
-        foreach (string pAlias in pFilm.Alias)
-        {
-            var alias = new Filmaliasmap()
-            {
-                FilmId = film.Id,
-                Alias = pAlias
-            };
-        }
-        foreach (string pLanguage in pFilm.Language)
-        {
-            var language = new Filmlanguagemap()
-            {
-                FilmId = film.Id,
-                FilmLanguage = pLanguage
-            };
-        }
-        foreach (string pRegion in pFilm.RegionsOfRelease)
-        {
-            var language = new Filmregionmap()
-            {
-                FilmId = film.Id,
-                RegionOfRelease = pRegion
-            };
-        }
-        foreach (string pReleaseDate in pFilm.ReleaseDate)
-        {
-            var releaseDate = new Filmreleasedatemap()
-            {
-                FilmId = film.Id,
-                Releasedate = pReleaseDate
-            };
-        }
-        foreach (string pTag in pFilm.Tags)
-        {
-            var tag = new Filmtagmap()
-            {
-                FilmId = film.Id,
-                TagTitle = pTag
-            };
-        }
+        // var rate = new Rate()
+        // {
+        //     Douban = pFilm.Rate.Douban,
+        //     Imdb = pFilm.Rate.IMDB
+        // };
+        // _connection.Insert(rate);
+        // int rateId = _connection.Query<int>("SELECT id FROM rate WHERE id = LAST_INSERT_ID();").FirstOrDefault();
+
+        // var film = new Film()
+        // {
+        //     Title = pFilm.Title,
+        //     ReleaseYear = pFilm.ReleaseYear,
+        //     RateId = rateId,
+        //     Duration = pFilm.Duration,
+        //     ThumbnailUrl = pFilm.ThumbnailUrl,
+        //     Description = pFilm.Description
+        // };
+        // _connection.Insert(film);
+        // int filmId = _connection.Query<int>("SELECT id FROM rate WHERE id = LAST_INSERT_ID();").FirstOrDefault();
+
+        // foreach (string pAlias in pFilm.Alias)
+        // {
+        //     var alias = new Filmaliasmap()
+        //     {
+        //         FilmId = filmId,
+        //         Alias = pAlias
+        //     };
+        //     _connection.Insert(alias);
+        // }
+
+        // foreach (string pLanguage in pFilm.Language)
+        // {
+        //     var language = new Filmlanguagemap()
+        //     {
+        //         FilmId = filmId,
+        //         FilmLanguage = pLanguage
+        //     };
+        //     _connection.Insert(language);
+        // }
+
+        // foreach (string pRegion in pFilm.RegionsOfRelease)
+        // {
+        //     var regions = new Filmregionmap()
+        //     {
+        //         FilmId = filmId,
+        //         RegionOfRelease = pRegion
+        //     };
+        //     _connection.Insert(regions);
+        // }
+
+        // foreach (string pReleaseDate in pFilm.ReleaseDate)
+        // {
+        //     var releaseDate = new Filmreleasedatemap()
+        //     {
+        //         FilmId = filmId,
+        //         Releasedate = pReleaseDate
+        //     };
+        //     _connection.Insert(releaseDate);
+        // }
+
+        // foreach (string pTag in pFilm.Tags)
+        // {
+        //     var tag = new Filmtagmap()
+        //     {
+        //         FilmId = filmId,
+        //         TagTitle = pTag
+        //     };
+        //     _connection.Insert(tag);
+        // }
+
+        int filmId = _connection.Query<int>("select id from film where title = @Title and description = @Description", new { Title = pFilm.Title, Description = pFilm.Description }).FirstOrDefault();
+
         foreach (var pLink in pFilm.Links)
         {
-            var link = new MODEL.FilmInfo.Link()
-            {
-                Type = pLink.Type
-            };
-
+            // pLink.Type
             foreach (var pLinkField in pLink.Fields)
             {
                 var linkField = new Linkfield()
                 {
-                    Id = film.Id,
                     Title = pLinkField.Title,
                     Size = pLinkField.Size,
                     Magnet = pLinkField.Magnet,
                     Torrent = pLinkField.Torrent
                 };
+
+                int fieldId = _connection.Query<int>("SELECT id FROM linkfield WHERE title = @Title and size = @Size and magnet = @Magnet and torrent = @Torrent", linkField).FirstOrDefault();
+
+
+                _connection.Execute("update linkfield set type = @Type where id = @FieldId;", new
+                {
+                    Type = pLink.Type,
+                    FieldId = fieldId
+                });
+                _connection.Execute("update linkfield set filmId = @FilmId where id = @FieldId;", new
+                {
+                    FilmId = filmId,
+                    FieldId = fieldId
+                });
+
+                // _connection.Insert(linkField);
+                // int fieldId = _connection.Query<int>("SELECT id FROM linkfieldmap WHERE id = LAST_INSERT_ID();").FirstOrDefault();
             }
-
         }
-
-
-
-
-
     }
-
 }

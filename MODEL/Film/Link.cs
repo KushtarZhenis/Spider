@@ -1,7 +1,9 @@
-namespace MODEL.Film;
+using System;
+using System.Collections.Generic;
 
-public class Link
+namespace MODEL.Film;
+public partial class Link()
 {
+    public int Id { get; set; }
     public string Type { get; set; }
-    public Field[] Fields { get; set; }
 }
