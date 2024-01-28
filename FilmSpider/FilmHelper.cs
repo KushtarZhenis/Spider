@@ -125,7 +125,6 @@ public class FilmHelper
 
         foreach (var pLink in pFilm.Links)
         {
-            // pLink.Type
             foreach (var pLinkField in pLink.Fields)
             {
                 var linkField = new Linkfield()
@@ -133,24 +132,11 @@ public class FilmHelper
                     Title = pLinkField.Title,
                     Size = pLinkField.Size,
                     Magnet = pLinkField.Magnet,
-                    Torrent = pLinkField.Torrent
-                };
-
-                int fieldId = _connection.Query<int>("SELECT id FROM linkfield WHERE title = @Title and size = @Size and magnet = @Magnet and torrent = @Torrent", linkField).FirstOrDefault();
-
-
-                _connection.Execute("update linkfield set type = @Type where id = @FieldId;", new
-                {
+                    Torrent = pLinkField.Torrent,
                     Type = pLink.Type,
-                    FieldId = fieldId
-                });
-                _connection.Execute("update linkfield set filmId = @FilmId where id = @FieldId;", new
-                {
-                    FilmId = filmId,
-                    FieldId = fieldId
-                });
-
-                // _connection.Insert(linkField);
+                    FilmId = filmId
+                };
+                _connection.Insert(linkField);
                 // int fieldId = _connection.Query<int>("SELECT id FROM linkfieldmap WHERE id = LAST_INSERT_ID();").FirstOrDefault();
             }
         }

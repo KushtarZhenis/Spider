@@ -15,33 +15,30 @@ string filmInfoDirectory = "/Users/kushtar/Desktop/Sources/Film/filmsInfo";
 int maxId = FileHelper.GetAllFilePath(filmInfoDirectory).Count;
 
 using var _connection = Utilities.GetOpenConnection();
-using (var tran = _connection.BeginTransaction())
+int id = 4307;
+
+DateTimeHelper.StartPoint(maxId, id);
+
+for (; id <= maxId; id++)
 {
-    DateTimeHelper.StartPoint(maxId);
+    string filePath = Path.Combine(filmInfoDirectory, $"film{id}.json");
+    string content = File.ReadAllText(filePath);
+    PartialFilm pFilm = JsonHelper.DeSerializeObject<PartialFilm>(content);
+    int count = 0;
+    count = _connection.Query<int>("select count(1) from film where title = @Title and description = @Description", new { Title = pFilm.Title, Description = pFilm.Description }).FirstOrDefault();
+    DateTimeHelper.CalculatePointInLoop();
 
-    for (int id = 1; id <= maxId; id++)
+    if (count < 2)
     {
-        string filePath = Path.Combine(filmInfoDirectory, $"film{id}.json");
-        string content = File.ReadAllText(filePath);
-        PartialFilm pFilm = JsonHelper.DeSerializeObject<PartialFilm>(content);
-        int count = 0;
-        count = _connection.Query<int>("select count(1) from film where title = @Title and description = @Description", new { Title = pFilm.Title, Description = pFilm.Description }).FirstOrDefault();
-        DateTimeHelper.CalculatePointInLoop();
-
-        if (count == 0)
+        try
         {
-            try
-            {
-                FilmHelper.InsertFilm(pFilm, id, _connection);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                tran.Rollback();
-            }
+            FilmHelper.InsertFilm(pFilm, id, _connection);
+        }
+        catch (Exception ex)
+        {
+            FileHelper.AppendLine("/Users/kushtar/Desktop/Logs/Saving2DB.txt", ex.Message);
         }
     }
-    tran.Commit();
 }
 
 _connection.Close();

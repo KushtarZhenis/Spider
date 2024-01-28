@@ -19,9 +19,9 @@ public class FileHelper
     #endregion
 
     #region Append A Line To File +AppendLine(string filePath, string content)
-    public static async Task AppendLine(string filePath, string content)
+    public static void AppendLine(string filePath, string content)
     {
-        await File.AppendAllTextAsync(filePath, content + Environment.NewLine);
+        File.AppendAllText(filePath, content + Environment.NewLine);
     }
     #endregion
 
