@@ -5,45 +5,27 @@ using YoutubeExplode.Converter;
 using System.Text.RegularExpressions;
 using YoutubeExplode.Videos.Streams;
 using YoutubeExplode.Common;
+using AngleSharp.Io.Dom;
 
 // string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Sources/Videos");
 
 // await VideoHelper.StartDownloading(directoryPath);
 
-
+string filePath = "/Users/kushtar/Desktop/Github/CSharp/Spider/VideoSpider/mp3.json";
+string content = File.ReadAllText(filePath).Replace("https://www.youtube.com/watch?v=", "");
+List<string> idList = JsonHelper.DeSerializeObject<List<string>>(content);
 
 var youtube = new YoutubeClient();
 
 // string videoId = "R3GfuzLMPkA"; // Replace with the actual video ID
-string videoId = "EJr3uAQwGek"; // Replace with the actual video ID
+// string videoId = "EJr3uAQwGek"; // Replace with the actual video ID
 
-var streams = await youtube.Videos.Streams.GetManifestAsync(videoId);
-var video = await youtube.Videos.GetAsync(videoId);
-
-Console.WriteLine(streams.Streams[2].Url);
-
-
-var thumbnailUrls = video.Thumbnails;
-
-string thumbnailUrl = thumbnailUrls.GetWithHighestResolution().Url;
-
-
-var muxedStreams = streams.GetMuxedStreams();
-
-var streamInfo1 = muxedStreams.Where(s => s.Container == Container.Mp4);
-
-var streamInfo2 = streamInfo1.OrderByDescending(s => s.VideoQuality);
-
-var streamInfo = streamInfo2.FirstOrDefault();
-
-
-
-if (streamInfo != null)
+foreach (string videoId in idList)
 {
-    string mp4Url = streamInfo.Url;
-    Console.WriteLine("MP4 URL: " + mp4Url);
+    var streams = await youtube.Videos.Streams.GetManifestAsync(videoId);
+    var muxedStreams = streams.GetAudioStreams();
+
+    
+
 }
-else
-{
-    Console.WriteLine("No .mp4 stream found.");
-}
+

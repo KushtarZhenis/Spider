@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VideoSpider")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7c680158f8c468daec67a00c1cedb73984260f3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1aade7cca698a73be27e71551a0c993bf8511188")]
 [assembly: System.Reflection.AssemblyProductAttribute("VideoSpider")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VideoSpider")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
