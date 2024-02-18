@@ -28,3 +28,6 @@
 /Users/kushtar/Desktop/Github/CSharp/Spider/VideoSpider/obj/Debug/net8.0/VideoSpider.pdb
 /Users/kushtar/Desktop/Github/CSharp/Spider/VideoSpider/obj/Debug/net8.0/VideoSpider.genruntimeconfig.cache
 /Users/kushtar/Desktop/Github/CSharp/Spider/VideoSpider/obj/Debug/net8.0/ref/VideoSpider.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/VideoSpider/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/VideoSpider/bin/Debug/net8.0/MailKit.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/VideoSpider/bin/Debug/net8.0/MimeKit.dll
