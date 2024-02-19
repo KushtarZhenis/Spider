@@ -26,3 +26,7 @@
 /Users/kushtar/Desktop/Github/CSharp/Spider/SongSpider/obj/Debug/net8.0/SongSpider.pdb
 /Users/kushtar/Desktop/Github/CSharp/Spider/SongSpider/obj/Debug/net8.0/SongSpider.genruntimeconfig.cache
 /Users/kushtar/Desktop/Github/CSharp/Spider/SongSpider/obj/Debug/net8.0/ref/SongSpider.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/SongSpider/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/SongSpider/bin/Debug/net8.0/FFmpeg.Net.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/SongSpider/bin/Debug/net8.0/MailKit.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/SongSpider/bin/Debug/net8.0/MimeKit.dll

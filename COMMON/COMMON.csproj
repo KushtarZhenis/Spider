@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-      <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App"/>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.57"/>
@@ -19,6 +19,6 @@
     <ProjectReference Include="../MODEL/MODEL.csproj"/>
   </ItemGroup>
   <ItemGroup>
-      <EmbeddedResource Include="templates/verificatonemail.html" />
+    <EmbeddedResource Include="templates/verificatonemail.html"/>
   </ItemGroup>
 </Project>

@@ -20,36 +20,54 @@ string saveDirectory = PathHelper.Combine(desktopPath, "Sources/Mp3");
 string videosDirectory = PathHelper.Combine(desktopPath, "Sources/Mp3Videos");
 string errorLogPath = PathHelper.Combine(desktopPath, "Logs/Mp3Downloads/Mp3Downloads.txt");
 
+if (!Directory.Exists(videosDirectory)) Directory.CreateDirectory(videosDirectory);
+if (!Directory.Exists(saveDirectory)) Directory.CreateDirectory(saveDirectory);
+
 List<string> pathList = FileHelper.GetAllFilePath(videosDirectory);
-foreach (string path in pathList)
+
+DateTimeHelper.StartPoint(pathList.Count);
+foreach (string inputFilePath in pathList)
 {
-    string ffmpegPath = "ffmpeg";
-    if (path.EndsWith(".mp4"))
-    {
-        
-    }
-    string outputFilePath = ;
+    string outputFilePath = PathHelper.Combine(saveDirectory, Path.GetFileNameWithoutExtension(inputFilePath) + ".mp3");
 
-    string arguments = $"-i \"{path}\" -vn -acodec libmp3lame -q:a 2 \"{outputFilePath}\"";
-    ProcessStartInfo processInfo = new ProcessStartInfo(ffmpegPath, arguments)
+    try
     {
-        CreateNoWindow = true,
-        UseShellExecute = false
-    };
-    using (Process process = Process.Start(processInfo))
+        var ffmpegProcess = new Process();
+        ffmpegProcess.StartInfo.FileName = "ffmpeg";
+        ffmpegProcess.StartInfo.Arguments = $"-i \"{inputFilePath}\" -vn -acodec libmp3lame -q:a 2 \"{outputFilePath}\"";
+        ffmpegProcess.StartInfo.RedirectStandardOutput = true;
+        ffmpegProcess.StartInfo.RedirectStandardError = true;
+        ffmpegProcess.StartInfo.UseShellExecute = false;
+        ffmpegProcess.StartInfo.CreateNoWindow = true;
+        ffmpegProcess.Start();
+
+        string output = ffmpegProcess.StandardOutput.ReadToEnd();
+        string error = ffmpegProcess.StandardError.ReadToEnd();
+
+        ffmpegProcess.WaitForExit();
+
+        if (!ffmpegProcess.HasExited)
+        {
+            ffmpegProcess.Kill();
+        }
+
+        DateTimeHelper.CalculatePointInLoop();
+        Console.WriteLine("Output: " + output);
+        Console.WriteLine("Error: " + error);
+    }
+    catch (Exception ex)
     {
-        process.WaitForExit();
+        Console.WriteLine($"An error occurred: {ex.Message}");
     }
 
-    Console.WriteLine("Conversion complete.");
+    // if (File.Exists(path)) File.Delete(path);
 }
 
 
 
 
 
-// string playListId = "RDyMBYDHDi-ak";
-
+// string playListId = "4PxW-GRpDhY";//RDyMBYDHDi-ak
 
 // var youtube = new YoutubeClient();
 
@@ -58,27 +76,27 @@ foreach (string path in pathList)
 
 // foreach (var video in videoList)
 // {
-//     try
-//     {
-//         var streams = await youtube.Videos.Streams.GetManifestAsync(video.Id);
-//         var audioStreamInfo = streams.GetAudioOnlyStreams().Where(s => s.Container == Container.Mp4).GetWithHighestBitrate();
+    // try
+    // {
+    //     var streams = await youtube.Videos.Streams.GetManifestAsync(video.Id);
+    //     var audioStreamInfo = streams.GetAudioOnlyStreams().Where(s => s.Container == Container.Mp4).GetWithHighestBitrate();
 
-//         if (audioStreamInfo == null)
-//         {
-//             File.WriteAllText(errorLogPath, $"{video.Title} Audio Streams Not Found\n\n");
-//         }
-//         else
-//         {
-//             string savePath = PathHelper.Combine(saveDirectory, video.Title + '.' + Container.Mp4.Name);
-//             Console.Clear();
-//             DateTimeHelper.CalculatePointInLoop();
-//             Console.WriteLine($"Downloading  =>  {video.Title}  {video.Duration}");
-//             await youtube.Videos.Streams.DownloadAsync(audioStreamInfo, savePath);
-//         }
-//     }
-//     catch (Exception ex)
-//     {
-//         File.WriteAllText(errorLogPath, $"Error When Downloading {video.Title}  :  {ex.Message}\n\n");
-//     }
+    //     if (audioStreamInfo == null)
+    //     {
+    //         File.WriteAllText(errorLogPath, $"{video.Title} Audio Streams Not Found\n\n");
+    //     }
+    //     else
+    //     {
+    //         string savePath = PathHelper.Combine(videosDirectory, video.Title + '.' + Container.Mp4.Name);
+    //         Console.Clear();
+    //         DateTimeHelper.CalculatePointInLoop();
+    //         Console.WriteLine($"Downloading  =>  {video.Title}  {video.Duration}");
+    //         await youtube.Videos.Streams.DownloadAsync(audioStreamInfo, savePath);
+    //     }
+    // }
+    // catch (Exception ex)
+    // {
+    //     File.WriteAllText(errorLogPath, $"Error When Downloading {video.Title}  :  {ex.Message}\n\n");
+    // }
 // }
 

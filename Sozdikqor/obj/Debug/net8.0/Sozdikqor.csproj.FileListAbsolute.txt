@@ -26,3 +26,9 @@
 /Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/obj/Debug/net8.0/Sozdikqor.pdb
 /Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/obj/Debug/net8.0/Sozdikqor.genruntimeconfig.cache
 /Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/obj/Debug/net8.0/ref/Sozdikqor.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/bin/Debug/net8.0/BouncyCastle.Crypto.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/bin/Debug/net8.0/FFmpeg.Net.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/bin/Debug/net8.0/itextsharp.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/bin/Debug/net8.0/MailKit.dll
+/Users/kushtar/Desktop/Github/CSharp/Spider/Sozdikqor/bin/Debug/net8.0/MimeKit.dll

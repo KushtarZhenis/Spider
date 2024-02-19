@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider", "Spider\Spider.csproj", "{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmSpider", "FilmSpider\FilmSpider.csproj", "{708C7E21-1780-45C1-A7F0-DA49F90D0585}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongSpider", "SongSpider\SongSpider.csproj", "{4A22E333-E088-4074-81C3-FCD318BAC2F1}"
@@ -18,14 +16,7 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CEEC601-BBE4-4EE5-861A-21D92397DFA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{708C7E21-1780-45C1-A7F0-DA49F90D0585}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{708C7E21-1780-45C1-A7F0-DA49F90D0585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{708C7E21-1780-45C1-A7F0-DA49F90D0585}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,5 +33,8 @@ Global
 		{A2F9466C-3C3E-4E42-A256-0B5F8D045957}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2F9466C-3C3E-4E42-A256-0B5F8D045957}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2F9466C-3C3E-4E42-A256-0B5F8D045957}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
