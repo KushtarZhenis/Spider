@@ -1,23 +1,23 @@
-using System;
 using System.Collections.Concurrent;
 
 namespace COMMON;
 
 public class SiteSingleton
 {
+    private static readonly object _lock = new();
     private static SiteSingleton instance = null;
-    private ConcurrentDictionary<string, string> keyValueDic = new ConcurrentDictionary<string, string>();
+    private ConcurrentDictionary<string, string> keyValueDic = [];
     private SiteSingleton() { }
 
     public static SiteSingleton GetInstance
     {
         get
         {
-            if (instance == null)
+            lock (_lock)
             {
-                instance = new SiteSingleton();
+                instance ??= new SiteSingleton();
+                return instance;
             }
-            return instance;
         }
     }
 
@@ -31,14 +31,14 @@ public class SiteSingleton
         if (keyValueDic.TryGetValue("connectionString", out string connStr)) return connStr;
         return "";
     }
-    public void SetSiteBaseUrl(string url)
+    public void SetSiteUrl(string url)
     {
-        keyValueDic.AddOrUpdate("baseUrl", url, (key, oldValue) => url);
+        keyValueDic.AddOrUpdate("siteUrl", url, (key, oldValue) => url);
     }
 
-    public string GetSiteBaseUrl()
+    public string GetSiteUrl()
     {
-        if (keyValueDic.TryGetValue("baseUrl", out string url)) return url;
+        if (keyValueDic.TryGetValue("siteUrl", out string url)) return url;
         return "";
     }
 }

@@ -32,7 +32,7 @@ public class DateTimeHelper
 
         TimeSpan timePassed = CurrentTime - BeginTime;
         long leftTotalSeconds = (int)Math.Round(timePassed.TotalSeconds / Count * (TotalNum - Count));
-        TimeSpan timeLeft = new TimeSpan(TimeSpan.TicksPerSecond * leftTotalSeconds);
+        TimeSpan timeLeft = new(TimeSpan.TicksPerSecond * leftTotalSeconds);
 
         double percent = Math.Round(100.00 * Count / TotalNum, 2);
         Console.WriteLine($"{Count} / {TotalNum} => {percent}%");

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -9,14 +6,14 @@ public class AESHelper
 {
     public static string Base64Encode(string plainText)
     {
-        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-        return System.Convert.ToBase64String(plainTextBytes);
+        var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+        return Convert.ToBase64String(plainTextBytes);
     }
 
     public static string Base64Decode(string base64EncodedData)
     {
-        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-        return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+        return Encoding.UTF8.GetString(base64EncodedBytes);
     }
 
     public static string EncryptText(string input, string password)
@@ -42,19 +39,19 @@ public class AESHelper
     private static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
     {
         byte[] encryptedBytes = null;
-        byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        byte[] saltBytes = [1, 2, 3, 4, 5, 6, 7, 8];
         using (var ms = new MemoryStream())
         {
-#pragma warning disable SYSLIB0022 // Type or member is obsolete
+            #pragma warning disable SYSLIB0022 // Type or member is obsolete
             using var AES = new RijndaelManaged();
-#pragma warning restore SYSLIB0022 // Type or member is obsolete
+            #pragma warning restore SYSLIB0022 // Type or member is obsolete
 
             AES.KeySize = 256;
             AES.BlockSize = 128;
 
-#pragma warning disable SYSLIB0041 // Type or member is obsolete
+            #pragma warning disable SYSLIB0041 // Type or member is obsolete
             var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
-#pragma warning restore SYSLIB0041 // Type or member is obsolete
+            #pragma warning restore SYSLIB0041 // Type or member is obsolete
 
             AES.Key = key.GetBytes(AES.KeySize / 8);
             AES.IV = key.GetBytes(AES.BlockSize / 8);
@@ -78,16 +75,16 @@ public class AESHelper
 
         using (var ms = new MemoryStream())
         {
-#pragma warning disable SYSLIB0022 // Type or member is obsolete
+            #pragma warning disable SYSLIB0022 // Type or member is obsolete
             using var AES = new RijndaelManaged();
-#pragma warning restore SYSLIB0022 // Type or member is obsolete
+            #pragma warning restore SYSLIB0022 // Type or member is obsolete
 
             AES.KeySize = 256;
             AES.BlockSize = 128;
 
-#pragma warning disable SYSLIB0041 // Type or member is obsolete
+            #pragma warning disable SYSLIB0041 // Type or member is obsolete
             var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
-#pragma warning restore SYSLIB0041 // Type or member is obsolete
+            #pragma warning restore SYSLIB0041 // Type or member is obsolete
             AES.Key = key.GetBytes(AES.KeySize / 8);
             AES.IV = key.GetBytes(AES.BlockSize / 8);
 

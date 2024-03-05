@@ -1,5 +1,3 @@
-using AngleSharp.Text;
-
 namespace COMMON;
 
 public class PathHelper
@@ -7,30 +5,7 @@ public class PathHelper
     #region Combine 2 Paths +Combine(string path1, string path2)
     public static string Combine(string path1, string path2)
     {
-        if (path1.EndsWith('/'))
-        {
-            for (int index = path1.Length - 1; index > 0; index--)
-            {
-                if (path1[index] != '/')
-                {
-                    path1 = path1[..(index + 1)];
-                    break;
-                }
-            }
-        }
-
-        if (path2.StartsWith('/'))
-        {
-            for (int index = 1; index < path2.Length; index++)
-            {
-                if (path2[index] != '/')
-                {
-                    return path1 + path2[(index - 1)..];
-                }
-            }
-        }
-
-        return path1 + '/' + path2;
+        return path1.EndsWith('/') ? (path1 + path2) : path1 + '/' + path2;
     }
     #endregion
 
