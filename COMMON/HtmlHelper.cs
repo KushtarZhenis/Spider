@@ -6,20 +6,31 @@ public class HtmlHelper
     #region Get Html Document From Url +GetHtmlDom(string url)
     public static HtmlDocument GetHtmlDom(string url)
     {
-        HtmlWeb web = new HtmlWeb();
-        HtmlDocument document = web.Load(url);
-        return document;
+        try
+        {
+            var web = new HtmlWeb();
+            HtmlDocument document = web.Load(url);
+            return document;
+        }
+        catch
+        {
+            return null;
+        }
     }
     #endregion
 
     #region Get Html Document As String From Url +GetHtmlDomAsString(string url)
     public static string GetHtmlDomAsString(string url)
     {
-
-        HtmlWeb web = new HtmlWeb();
-        string document = web.Load(url).DocumentNode.OuterHtml;
-
-        return document;
+        try
+        {
+            string document = GetHtmlDom(url)?.DocumentNode?.OuterHtml ?? string.Empty;
+            return document;
+        }
+        catch
+        {
+            return string.Empty;
+        }
     }
     #endregion
 

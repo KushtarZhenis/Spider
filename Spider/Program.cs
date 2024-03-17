@@ -7,34 +7,81 @@ using YoutubeExplode.Videos.Streams;
 
 
 string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-string mp3Directory = PathHelper.Combine(desktopPath, "Sources/Mp3");
-//  string videosDirectory = PathHelper.Combine(desktopPath, "Sources/Mp3Videos"); 
-string errorLogPath = PathHelper.Combine(desktopPath, "Logs/Mp3Downloads/Mp3Downloads.txt");
-//  if (!Directory.Exists(videosDirectory)) Directory.CreateDirectory(videosDirectory); 
+string mp3Directory = PathHelper.Combine(desktopPath, "Sources/Mp3/Mp3en");
+string deleteDirectory = PathHelper.Combine(desktopPath, "Sources/Mp3/Delete");
+string notFinishedPath = PathHelper.Combine(desktopPath, "Sources/Mp3/notfinished.json");
+string errorLog = PathHelper.Combine(desktopPath, "Logs/Mp3Downloads");
+
 if (!Directory.Exists(mp3Directory)) Directory.CreateDirectory(mp3Directory);
+if (!Directory.Exists(errorLog)) Directory.CreateDirectory(errorLog);
 
 
-// string sourcePath = PathHelper.Combine(mp3Directory, "Wide Awake feat Kianna - Giulio Cercato __Lyrics__.mp4");
-// string destinationPath = sourcePath[..^4] + ".mp3";
+List<string> deletePathList = FileHelper.GetAllFilePath(deleteDirectory);
+List<string> mp3PathList = FileHelper.GetAllFilePath(mp3Directory);
+List<string> errorList = [];
+int count = 0;
+int errorCount = 0;
+
+foreach (string deletePath in deletePathList)
+{
+    try
+    {
+        string mp3Path = deletePath.Replace("/Sources/Mp3/Delete/", "/Sources/Mp3/Mp3en/");
+
+        if (File.Exists(mp3Path))
+        {
+            File.Delete(mp3Path);
+            count++;
+        }
+        else
+        {
+            errorList.Add(mp3Path);
+        }
+    }
+    catch
+    {
+        errorCount++;
+    }
+}
+
+Console.WriteLine(count);
+Console.WriteLine(errorCount);
+Console.WriteLine(errorList.Count);
+File.AppendAllText(notFinishedPath, JsonHelper.SerializeObject(errorList));
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var youtube = new YoutubeClient();
 
 // string listId = "RDIcrbM1l_BoI";
 // var videoList = await youtube.Playlists.GetVideosAsync(listId);
 
 // int errorCount = 0;
 
-var youtube = new YoutubeClient();
+// var videos = await youtube.Channels.GetUploadsAsync("UCCSGhaYqvTLyQ4Jn-PSVT9A");
 
-var videos = await youtube.Channels.GetUploadsAsync("UCCSGhaYqvTLyQ4Jn-PSVT9A");
+// double duration = 0;
 
-double duration = 0;
+// foreach (var video in videos)
+// {
+//     duration += video.Duration?.TotalHours ?? 0;
+// }
 
-foreach (var video in videos)
-{
-    duration += video.Duration?.TotalHours ?? 0;
-}
+// Console.WriteLine($"{duration} Hours");
+// Console.WriteLine($"{duration / 24} Days");
 
-Console.WriteLine($"{duration} Hours");
-Console.WriteLine($"{duration / 24} Days");
+
+
 
 
 
