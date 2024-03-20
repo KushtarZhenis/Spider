@@ -7,47 +7,13 @@ using YoutubeExplode.Videos.Streams;
 
 
 string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-string mp3Directory = PathHelper.Combine(desktopPath, "Sources/Mp3/Mp3en");
-string deleteDirectory = PathHelper.Combine(desktopPath, "Sources/Mp3/Delete");
-string notFinishedPath = PathHelper.Combine(desktopPath, "Sources/Mp3/notfinished.json");
+string videoDirectory = PathHelper.Combine(desktopPath, "Sources/Videos/");
 string errorLog = PathHelper.Combine(desktopPath, "Logs/Mp3Downloads");
 
-if (!Directory.Exists(mp3Directory)) Directory.CreateDirectory(mp3Directory);
+if (!Directory.Exists(videoDirectory)) Directory.CreateDirectory(videoDirectory);
 if (!Directory.Exists(errorLog)) Directory.CreateDirectory(errorLog);
 
-
-List<string> deletePathList = FileHelper.GetAllFilePath(deleteDirectory);
-List<string> mp3PathList = FileHelper.GetAllFilePath(mp3Directory);
-List<string> errorList = [];
-int count = 0;
-int errorCount = 0;
-
-foreach (string deletePath in deletePathList)
-{
-    try
-    {
-        string mp3Path = deletePath.Replace("/Sources/Mp3/Delete/", "/Sources/Mp3/Mp3en/");
-
-        if (File.Exists(mp3Path))
-        {
-            File.Delete(mp3Path);
-            count++;
-        }
-        else
-        {
-            errorList.Add(mp3Path);
-        }
-    }
-    catch
-    {
-        errorCount++;
-    }
-}
-
-Console.WriteLine(count);
-Console.WriteLine(errorCount);
-Console.WriteLine(errorList.Count);
-File.AppendAllText(notFinishedPath, JsonHelper.SerializeObject(errorList));
+await VideoHelper.DownloadVideo(videoDirectory, "https://youtube.com");
 
 
 
@@ -79,9 +45,6 @@ File.AppendAllText(notFinishedPath, JsonHelper.SerializeObject(errorList));
 
 // Console.WriteLine($"{duration} Hours");
 // Console.WriteLine($"{duration / 24} Days");
-
-
-
 
 
 
