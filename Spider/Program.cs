@@ -13,7 +13,7 @@ string errorLog = PathHelper.Combine(desktopPath, "Logs/Mp3Downloads");
 if (!Directory.Exists(videoDirectory)) Directory.CreateDirectory(videoDirectory);
 if (!Directory.Exists(errorLog)) Directory.CreateDirectory(errorLog);
 
-await VideoHelper.DownloadVideo(videoDirectory, "https://youtube.com");
+await VideoHelper.DownloadVideo(videoDirectory, "https://youtube.com/");
 
 
 
